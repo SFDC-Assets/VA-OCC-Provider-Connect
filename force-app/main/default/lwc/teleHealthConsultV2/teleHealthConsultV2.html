@@ -1,0 +1,106 @@
+<template>
+	<lightning-card>
+		<div class="slds-var-p-around_medium">
+			<template if:true={creatingCase}>
+				<lightning-spinner variant="brand" size="medium" alternative-text="Creating case ..."></lightning-spinner>
+			</template>
+			<div class="slds-grid slds-wrap">
+				<div class="slds-size_1-of-2 slds-p-left_xx-small">
+					<p class="slds-text-heading_small slds-text-align_center slds-p-bottom_x-small">
+						Select a button for Speciality and Channel
+					</p>
+					<table width="100%">
+						<template for:each={skillsAndButtons} for:item="skill">
+							<tr key={skill.skillName}>
+								<td class="slds-text-align_left slds-truncate">
+									<strong>
+										<lightning-formatted-text value={skill.skillName} class={skill.skillNameFormat}>
+										</lightning-formatted-text>
+									</strong>
+<!-- 									(<lightning-formatted-number value={skill.maxCapacity}> </lightning-formatted-number>)
+ -->								</td>
+								<td class="slds-var-p-vertical_xxx-small">
+									<lightning-button-group>
+										<lightning-button
+											disabled={skill.chat.disabled}
+											label="Chat"
+											icon-name="utility:chat"
+											variant={skill.chat.variant}
+											data-skill={skill.skillName}
+											data-channel="Chat"
+											data-channel-short="chat"
+											onclick={handleButtonSelection}
+										>
+										</lightning-button>
+										<lightning-button
+											disabled={skill.teams.disabled}
+											label="Teams"
+											icon-name="utility:groups"
+											variant={skill.teams.variant}
+											data-skill={skill.skillName}
+											data-channel="Teams Meeting"
+											data-channel-short="teams"
+											onclick={handleButtonSelection}
+										>
+										</lightning-button>
+										<lightning-button
+											disabled={skill.phone.disabled}
+											label="Phone"
+											icon-name="utility:call"
+											variant={skill.phone.variant}
+											data-skill={skill.skillName}
+											data-channel="Phone"
+											data-channel-short="phone"
+											onclick={handleButtonSelection}
+										>
+										</lightning-button>
+									</lightning-button-group>
+								</td>
+							</tr>
+						</template>
+					</table>
+				</div>
+				<div class="slds-size_1-of-2 slds-p-right_xx-small">
+					<p class="slds-text-heading_small slds-text-align_center slds-p-bottom_x-small">
+						Enter additional details for your case (optional)
+					</p>	
+					<section>
+						<lightning-textarea
+							disabled={connectButtonDisable}
+							data-id="case-details"
+							label="Case Details (optional):"
+							placeholder="Enter your case details here."
+							max-length={maxDetailsChars}
+							autocomplete
+							class="detailsHeight"
+							onchange={handleCaseDetails}
+						></lightning-textarea>
+					</section>
+					<p class="slds-var-p-bottom_small slds-text-align_right slds-text-color_inverse-weak slds-text-body_small">
+						<lightning-formatted-number value={detailsCharsRemaining}> </lightning-formatted-number>
+						<lightning-formatted-text value=" characters remaining"> </lightning-formatted-text>
+					</p>
+					<section class="slds-var-p-vertical_small">
+						<lightning-input
+							type="text"
+							disabled={connectButtonDisable}
+							data-id="member-id"
+							label="Veteran Member ID (optional):"
+							placeholder="Member ID"
+							onchange={handleVeteranMemberId}
+						></lightning-input>
+					</section>
+					<section class="slds-var-p-vertical_large slds-align_absolute-center">
+						<lightning-button
+							variant="brand"
+							label="Connect"
+							disabled={connectButtonDisable}
+							onclick={handleSubmit}
+						></lightning-button>
+					</section>
+				</div>
+			</div>		
+			
+		</div>
+	</lightning-card>
+</template>

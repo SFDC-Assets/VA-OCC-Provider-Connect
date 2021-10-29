@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>TeleHealth Consultation V2</masterLabel>
+    <description>VHA TeleHealth Consultation LWC for the utility bar. (V2)</description>
+    <targets>
+        <target>lightning__UtilityBar</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__UtilityBar">
+            <property name="refreshSeconds" label="The number of seconds between refreshes" type="Integer" default="5" />
+            <property name="minimumSkillLevel" label="Minimal skill level for inclusion in skill list" type="Integer" default="5" />
+        </targetConfig>
+        <targetConfig targets="lightning__HomePage">
+            <property name="refreshSeconds" label="The number of seconds between refreshes" type="Integer" default="5" />
+            <property name="minimumSkillLevel" label="Minimal skill level for inclusion in skill list" type="Integer" default="5" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
